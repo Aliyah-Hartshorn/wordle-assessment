@@ -1,32 +1,32 @@
-# wordle-assessment
+# wordle-assessment 
 
-This Python program is a command-line version of the Wordle game, where the user tries to guess a hidden five-letter word within a limited number of attempts. At the very start, the program imports the built-in random module. This module provides functions for generating random values, and in this case it is specifically used to randomly select the secret word from a list so that each game is different.
-
-
-
-The program then opens two text files using the open() function in read mode ('r'). The file target\_words.txt contains the list of possible secret words, while all\_words.txt contains all valid guesses the player is allowed to enter. The contents of these files are read line by line using the readlines() method. A list comprehension is used to process each line, where line.strip() removes any extra whitespace or newline characters. This results in two clean lists of words: target\_words and WORD\_LIST.
+his Python program is a command-line version of the Wordle game, where the user tries to guess a hidden five-letter word within a limited number of attempts. At the beginning of the program, the built-in random module is imported. This module provides functions for generating random values, and it is specifically used here to randomly choose the secret word from a list, ensuring that each time the game is played, a different word can be selected.
 
 
 
-Next, the program randomly selects one word from the target\_words list using random.choice() and stores it in the variable secret\_word. This is the word the player must guess. Two constants are also defined: MAX\_TRIES, which limits the player to six attempts, and WORD\_LENGTH, which ensures that all guesses must be exactly five letters long. These constants are used throughout the program to keep the rules consistent.
+The program then reads from two external text files: target\_words.txt and all\_words.txt. These files are essential to how the game works. The target\_words.txt file contains a curated list of valid five-letter words that can be chosen as the secret word for the game. This ensures that only appropriate and intended words are used as answers. The all\_words.txt file, on the other hand, contains a much larger list of acceptable words that the player is allowed to guess. This includes all possible valid guesses, not just the ones that can be selected as the secret word. Both files are opened in read mode, and their contents are processed line by line using readlines(). A list comprehension is used along with strip() to remove newline characters and whitespace, resulting in two clean lists: target\_words (possible answers) and WORD\_LIST (valid guesses).
 
 
 
-The function give\_feedback(secret, guess) is responsible for comparing the player’s guess to the secret word and generating feedback. It starts by creating a list called result, filled with underscores, which represent each letter position. Both the secret word and the guess are converted into lists of characters so they can be modified during processing. The function uses two loops. The first loop checks each position to see if the guessed letter exactly matches the secret letter. If it does, that letter is added to the result in uppercase, and both the secret and guess positions are set to None so they are not reused. The second loop checks for letters that exist in the secret word but are in the wrong position. These letters are added in lowercase, and once matched, they are removed from the secret list to avoid counting duplicates. Finally, the result list is joined into a single string and returned as feedback.
+After loading the word lists, the program uses random.choice() to select one word from target\_words and stores it in the variable secret\_word. This is the word the player must guess. Two constants are also defined: MAX\_TRIES, which limits the player to six attempts, and WORD\_LENGTH, which ensures all guesses are exactly five letters long. These constants help enforce the rules of the game consistently.
 
 
 
-The is\_valid\_word(word) function checks whether the user’s input is acceptable. It ensures the word is exactly five letters long and that it exists in the WORD\_LIST. This prevents invalid guesses and ensures the game only accepts real words from the provided list.
+The function give\_feedback(secret, guess) is responsible for comparing the user’s guess to the secret word and generating feedback. It starts by creating a list filled with underscores to represent each letter position. Both the secret word and the guess are converted into lists so they can be modified during processing. The function uses two loops: the first loop checks for letters that are correct and in the correct position, marking them as uppercase and removing them from further consideration. The second loop checks for letters that exist in the word but are in the wrong position, marking them as lowercase. This two-step process ensures accurate feedback, especially when dealing with repeated letters. The final result is joined into a string and returned.
 
 
 
-The main gameplay takes place in the play\_wordle() function. It begins by printing instructions for the user. A loop runs from 1 to MAX\_TRIES, representing each attempt. Inside this loop, there is another loop that repeatedly asks the user to input a guess until a valid word is entered. Once a valid guess is received, the program calls give\_feedback() to generate feedback and prints it.
+The is\_valid\_word(word) function checks whether the user’s input is acceptable. It ensures the word is exactly five letters long and that it exists in WORD\_LIST (which comes from all\_words.txt). This prevents invalid inputs such as random strings or incorrectly sized words.
 
 
 
-If the user’s guess matches the secret word, the program prints a congratulatory message and stops the game early using break. If the user does not guess the word within the allowed attempts, the loop completes normally, and the program reveals the correct word. This is handled using a for...else structure, where the else block only executes if the loop was not exited early.
+The main gameplay is handled in the play\_wordle() function. It displays instructions and then runs a loop for each attempt, up to the maximum number allowed. Within this loop, another loop ensures the user keeps entering input until a valid word is provided. Once a valid guess is entered, the program generates and displays feedback using the give\_feedback() function.
 
 
 
-Finally, the line if \_\_name\_\_ == "\_\_main\_\_": ensures that the play\_wordle() function only runs when the script is executed directly, and not if it is imported into another program. Overall, the code demonstrates how file handling, random selection, loops, conditionals, and functions work together to create an interactive text-based game.
+If the guess matches the secret\_word, the program congratulates the user and ends the game early. If the player uses all attempts without guessing correctly, the loop finishes and the correct word is revealed. This is handled using a for...else structure, where the else block runs only if the loop wasn’t exited early.
+
+
+
+Finally, the if \_\_name\_\_ == "\_\_main\_\_": statement ensures that the game only runs when the script is executed directly, not when it is imported elsewhere. Overall, the program combines file handling, randomness, input validation, and logical comparisons to create a fully functional text-based word game.
 
