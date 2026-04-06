@@ -1,6 +1,6 @@
 # wordle-assessment 
 
-his Python program is a command-line version of the Wordle game, where the user tries to guess a hidden five-letter word within a limited number of attempts. At the beginning of the program, the built-in random module is imported. This module provides functions for generating random values, and it is specifically used here to randomly choose the secret word from a list, ensuring that each time the game is played, a different word can be selected.
+This Python program is a command-line version of the Wordle game, where the user tries to guess a hidden five-letter word within a limited number of attempts. At the beginning of the program, the built-in random module is imported. This module provides functions for generating random values, and it is specifically used here to randomly choose the secret word from a list, ensuring that each time the game is played, a different word can be selected.
 
 
 
